@@ -1,6 +1,5 @@
 package com.api.parkingcontrol.dtos;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ public class ParkingSpotDto {
     private String parkingSpotNumber;
     @NotBlank
     @Size(max = 10)
-    private String lincensePlateCar;
+    private String licensePlateCar;
     @NotBlank
     private String brandCar;
     @NotBlank
