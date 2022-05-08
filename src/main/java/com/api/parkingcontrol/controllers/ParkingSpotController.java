@@ -3,7 +3,6 @@ package com.api.parkingcontrol.controllers;
 import com.api.parkingcontrol.dtos.ParkingSpotDto;
 import com.api.parkingcontrol.model.ParkingSpotModel;
 import com.api.parkingcontrol.services.ParkingSpotService;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.time.ZoneId;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/parkin-spot")
+@RequestMapping("/parking-spot")
 public class ParkingSpotController {
 
     final ParkingSpotService parkingSpotService;
