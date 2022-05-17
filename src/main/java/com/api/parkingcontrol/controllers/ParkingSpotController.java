@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/parking-spot")
+@RequestMapping("/api")
 public class ParkingSpotController {
 
     final ParkingSpotService parkingSpotService;
@@ -30,7 +30,7 @@ public class ParkingSpotController {
         this.parkingSpotService = parkingSpotService;
     }
 
-    @PostMapping
+    @PostMapping("/parking-spot")
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         if(parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: license Plate Car is already in use!");
@@ -47,12 +47,12 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpotModel));
     }
 
-    @GetMapping
+    @GetMapping("/parking-spot")
     public ResponseEntity<Page<ParkingSpotModel>> getAllParkingSpots(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC)Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/parking-spot/{id}")
     public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id")UUID id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
         if(!parkingSpotModelOptional.isPresent()) {
@@ -61,7 +61,7 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/parkiing-spot/{id}")
     public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "id") UUID id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
         if(!parkingSpotModelOptional.isPresent()) {
@@ -71,7 +71,7 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body("Parking Spot Deleted Sucessfully");
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/parking-spot/{id}")
     public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id,
                                                     @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
